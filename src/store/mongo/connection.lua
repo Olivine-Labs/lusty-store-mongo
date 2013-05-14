@@ -1,6 +1,6 @@
 local mongo = require "resty-mongol"
 local conn = mongo()
-local conn:set_timeout(config.timeout)
+conn:set_timeout(config.timeout)
 local ok, err = conn:connect(config.host, config.port)
 
 if not ok then

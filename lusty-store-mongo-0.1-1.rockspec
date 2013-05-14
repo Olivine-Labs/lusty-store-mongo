@@ -28,5 +28,6 @@ build = {
     ["lusty-store-mongo.store.mongo.post"]  = "src/store/mongo/post.lua",
     ["lusty-store-mongo.store.mongo.put"]  = "src/store/mongo/put.lua",
     ["lusty-store-mongo.store.mongo.get"]  = "src/store/mongo/get.lua",
+    ["lusty-store-mongo.store.mongo"]  = "src/store/mongo.lua"
   }
 }

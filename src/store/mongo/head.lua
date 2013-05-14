@@ -1,9 +1,14 @@
 local util = require 'lusty.util'
-local col = util.inline((...)..'.connection', {lusty=lusty, config=config})
+local packageName = (...):match("(.-)[^%.]+$")
 
 return {
   handler = function(context)
-    local query = context.query
-    return col:find(query, {lastModified:1})
+    local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
+    local results = {}
+    local cursor = col:find(context.query, {_id=1, lastModified=1})
+    for index, result in cursor:pairs() do
+      table.insert(results, result)
+    end
+    return results
   end
 }

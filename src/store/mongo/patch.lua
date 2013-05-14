@@ -1,8 +1,9 @@
 local util = require 'lusty.util'
-local col = util.inline((...)..'.connection', {lusty=lusty, config=config})
+local packageName = (...):match("(.-)[^%.]+$")
 
 return {
   handler = function(context)
+    local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
     local query, data = context.query, context.data
     local meta = getmetatable(data)
     if type(meta.__toStore) == "function" then
