@@ -23,7 +23,6 @@ build = {
   modules = {
     ["lusty-store-mongo.store.mongo.connection"]  = "src/store/mongo/connection.lua",
     ["lusty-store-mongo.store.mongo.head"]  = "src/store/mongo/head.lua",
-    ["lusty-store-mongo.store.mongo.options"]  = "src/store/mongo/options.lua",
     ["lusty-store-mongo.store.mongo.delete"]  = "src/store/mongo/delete.lua",
     ["lusty-store-mongo.store.mongo.patch"]  = "src/store/mongo/patch.lua",
     ["lusty-store-mongo.store.mongo.post"]  = "src/store/mongo/post.lua",
