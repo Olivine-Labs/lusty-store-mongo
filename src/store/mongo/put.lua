@@ -1,6 +1,5 @@
 local util = require 'lusty.util'
-local db = util.inline('lusty-store-mongo.store.mongo.connection', {lusty=lusty, config=config})
-local col = db.get_col(config.collection)
+local col = util.inline((...)..'.connection', {lusty=lusty, config=config})
 
 return {
   handler = function(context)
@@ -9,6 +8,7 @@ return {
     if type(meta.__toStore) == "function" then
       data = meta.__toStore(data, "put")
     end
-    return col:update(query, data, 1, 0, 1)
+    col:delete(query)
+    return col:insert(data)
   end
 }

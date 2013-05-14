@@ -1,6 +1,5 @@
 local util = require 'lusty.util'
-local db = util.inline('lusty-store-mongo.store.mongo.connection', {lusty=lusty, config=config})
-local col = db.get_col(config.collection)
+local col = util.inline((...)..'.connection', {lusty=lusty, config=config})
 
 return {
   handler = function(context)

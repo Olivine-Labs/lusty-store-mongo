@@ -1,10 +1,9 @@
 local util = require 'lusty.util'
-local db = util.inline('lusty-store-mongo.store.mongo.connection', {lusty=lusty, config=config})
-local col = db.get_col(config.collection)
+local col = util.inline((...)..'.connection', {lusty=lusty, config=config})
 
 return {
   handler = function(context)
-    local query, data = context.query, context.data
-    return col:find(query, data)
+    local query = context.query
+    return col:find(query, {lastModified:1})
   end
 }

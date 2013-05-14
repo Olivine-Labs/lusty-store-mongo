@@ -1,5 +1,5 @@
-local mongo = require "resty.mongol"
-local conn = mongo:new()
+local mongo = require "resty-mongol"
+local conn = mongo()
 local conn:set_timeout(config.timeout)
 local ok, err = conn:connect(config.host, config.port)
 
@@ -7,7 +7,7 @@ if not ok then
   lusty.context.log(err ,"error")
 end
 
-local db = conn:get_db_handle(config.database)
+local db = conn:new_db_handle(config.database)
 
 if config.secure then
   ok, err = db:auth(config.username, config.password)
@@ -17,4 +17,4 @@ if config.secure then
   end
 end
 
-return db
+return db:get_col(config.collection)
