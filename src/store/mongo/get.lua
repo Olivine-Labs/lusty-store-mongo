@@ -5,10 +5,14 @@ return {
   handler = function(context)
     local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
     local results = {}
-    local cursor = col:find(context.query, context.data)
-    for index, result in cursor:pairs() do
-      table.insert(results, result)
+    if context.query['_id'] then
+      return col:findOne(context.query, context.data)
+    else
+      local cursor = col:find(context.query, context.data)
+      for index, result in cursor:pairs() do
+        table.insert(results, result)
+      end
+      return results
     end
-    return results
   end
 }
