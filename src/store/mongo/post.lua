@@ -6,7 +6,7 @@ return {
   handler = function(context)
     local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
     local data = context.query
-    data['_id'] = object_id.new()
+    data['_id'] = object_id.new():tostring()
     local meta = getmetatable(data)
     if meta and type(meta.__toStore) == "function" then
       data = meta.__toStore(data, "post")

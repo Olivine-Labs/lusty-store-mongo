@@ -6,7 +6,7 @@ return {
     local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
     local results = {}
     if context.query['_id'] then
-      return col:findOne(context.query, context.data)
+      return col:find_one(context.query, context.data)
     else
       local cursor = col:find(context.query, context.data)
       for index, result in cursor:pairs() do
