@@ -9,6 +9,7 @@ return {
     if meta and type(meta.__toStore) == "function" then
       data = meta.__toStore(data, "patch")
     end
+    data.lastModified = os.time()
     return col:update(query, data, 0, 1, 1)
   end
 }

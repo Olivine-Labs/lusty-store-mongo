@@ -9,6 +9,7 @@ return {
       data = meta.__toStore(data, "put")
     end
     col:delete(context.query)
+    context.data.lastModified = os.time()
     return col:insert({context.data}, 0, 1)
   end
 }

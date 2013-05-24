@@ -11,6 +11,7 @@ return {
     if meta and type(meta.__toStore) == "function" then
       data = meta.__toStore(data, "post")
     end
+    data.lastModified = os.time()
     return col:insert({data}, 0, 1)
   end
 }
