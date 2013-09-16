@@ -1,15 +1,13 @@
 local util = require 'lusty.util'
 local packageName = (...):match("(.-)[^%.]+$")
+local query = require 'lusty-store-mongo.query'
 
 return {
   handler = function(context)
+    if not context.data["$set"] then context.data["$set"] = {} end
+    context.data["$set"].lastModified = os.time()
+    local q = query(context.query)
     local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
-    local query, data = context.query, context.data
-    local meta = getmetatable(data)
-    if meta and type(meta.__toStore) == "function" then
-      data = meta.__toStore(data, "patch")
-    end
-    data.lastModified = os.time()
-    return col:update(query, data, 0, 1, 1)
+    return col:update(q, context.data, 0, 1, 1)
   end
 }

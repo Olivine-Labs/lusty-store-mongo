@@ -1,18 +1,16 @@
-local util = require 'lusty.util'
+local util        = require 'lusty.util'
 local packageName = (...):match("(.-)[^%.]+$")
-local object_id = require 'resty-mongol.object_id'
+local objectId    = require 'resty-mongol.object_id'
+local query       = require 'lsuty-store-mongo.query'
 
 return {
   handler = function(context)
+    local q = query(context.query)
     local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
     if not context.data['_id'] then
-      context.data['_id'] = object_id.new():tostring()
+      context.data['_id'] = q['_id'] or objectId.new():tostring()
     end
-    local meta = getmetatable(context.data)
-    if meta and type(meta.__toStore) == "function" then
-      data = meta.__toStore(data, "put")
-    end
-    col:delete(context.query)
+    col:delete(q)
     context.data.lastModified = os.time()
     return col:insert({context.data}, 0, 1)
   end
