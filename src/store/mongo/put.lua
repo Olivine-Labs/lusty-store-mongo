@@ -1,7 +1,7 @@
 local util        = require 'lusty.util'
 local packageName = (...):match("(.-)[^%.]+$")
 local objectId    = require 'resty-mongol.object_id'
-local query       = require 'lsuty-store-mongo.query'
+local query       = require 'lusty-store-mongo.query'
 
 return {
   handler = function(context)
