@@ -12,6 +12,10 @@ return {
       local results = {}
       local cursor = col:find(q, context.data)
 
+      if m.sort then
+        cursor:sort(m.sort)
+      end
+
       if m.limit then
         if m.limit.offset then
           cursor:skip(m.limit.offset)
