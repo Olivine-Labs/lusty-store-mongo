@@ -16,7 +16,7 @@ dependencies = {
   "lua >= 5.1",
   "lusty-log >= 0.2-0",
   "lusty-store >= 0.2-0",
-  "resty-mongol" >= 0.5-0",
+  "resty-mongol >= 0.5-0",
   "busted >= 1.7-1"
 }
 build = {
