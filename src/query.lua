@@ -14,21 +14,25 @@ local ops = {
   isnot   = function(result, clause) queries.arrayOp("$nin", result, clause) end,
   ["and"] = function(result, clause) queries.subquery("$and", result, clause) end,
   ["or"]  = function(result, clause) queries.subquery("$or", result, clause) end,
-  sort    = function() end,
-  limit   = function() end
+  sort    = function(result, clause, meta)
+    meta.sort = clause.arguments[1]
+  end,
+  limit   = function(result, clause, meta)
+    meta.limit = clause.arguments[1]
+  end
 }
 
 local function query(query)
-  local result = {}
+  local result, meta = {}, {}
   for _, clause in pairs(query) do
     local op = ops[clause.operation]
     if op then
-      op(result, clause)
+      op(result, clause, meta)
     else
       error("Unsupported query operation '"..clause.operation.."'")
     end
   end
-  return result
+  return result, meta
 end
 
 
