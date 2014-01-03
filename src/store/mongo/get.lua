@@ -14,10 +14,10 @@ return {
 
       if m.limit then
         if m.limit.offset then
-          cursor.skip(m.limit.offset)
+          cursor:skip(m.limit.offset)
         end
         if m.limit.length then
-          cursor.limit(m.limit.length)
+          cursor:limit(m.limit.length)
         end
       end
 
