@@ -19,6 +19,9 @@ local ops = {
   end,
   limit   = function(result, clause, meta)
     meta.limit = clause.arguments[1]
+  end,
+  fields  = function(result, clause, meta)
+    meta.fields = clause.arguments[1]
   end
 }
 
