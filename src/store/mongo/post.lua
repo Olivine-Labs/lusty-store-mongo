@@ -8,7 +8,6 @@ return {
 
     local data  = context.query
     data['_id'] = objectId.new():tostring()
-    data.lastModified = os.time()
 
     return col:insert({data}, 0, 1)
   end

@@ -11,7 +11,6 @@ return {
       context.data['_id'] = q['_id'] and q['_id']['$in'][1] or objectId.new():tostring()
     end
     col:delete(q)
-    context.data.lastModified = os.time()
     return col:insert({context.data}, 0, 1)
   end
 }
