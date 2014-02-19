@@ -6,6 +6,7 @@ return {
   handler = function(context)
     local q, m = query(context.query)
     local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
+    local results = {}
     local cursor = col:find(q, m.fields)
 
     if m.sort then
@@ -21,6 +22,9 @@ return {
       end
     end
 
-    return cursor:pairs()
+    for index, result in cursor:pairs() do
+      table.insert(results, result)
+    end
+    return results
   end
 }

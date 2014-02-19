@@ -1,8 +1,8 @@
 package = "lusty-store-mongo"
-version = "0.10-0"
+version = "0.11-0"
 source = {
-  url = "https://github.com/Olivine-Labs/lusty-store-mongo/archive/v0.10.tar.gz",
-  dir = "lusty-store-mongo-0.10"
+  url = "https://github.com/Olivine-Labs/lusty-store-mongo/archive/v0.11.tar.gz",
+  dir = "lusty-store-mongo-0.11"
 }
 description = {
   summary = "Mongo plugin for lusty persistence interface.",

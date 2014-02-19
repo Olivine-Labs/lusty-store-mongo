@@ -9,6 +9,7 @@ local ops = {
   lte     = function(result, clause) queries.simpleOp("$lte", result, clause) end,
   gt      = function(result, clause) queries.simpleOp("$gt", result, clause) end,
   gte     = function(result, clause) queries.simpleOp("$gte", result, clause) end,
+  reg     = function(result, clause) queries.simpleOp("$regex", result, clause) end,
   is      = function(result, clause) queries.arrayOp("$in", result, clause) end,
   has     = function(result, clause) queries.arrayOp("$all", result, clause) end,
   isnot   = function(result, clause) queries.arrayOp("$nin", result, clause) end,
