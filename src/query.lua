@@ -49,7 +49,16 @@ function queries.arrayOp(op, result, clause)
 end
 
 function queries.subquery(op, result, clause)
-  result[op] = query(clause.arguments[1])
+  if not result[op] then
+    result[op] = {}
+  end
+  for i=1, #clause.arguments do
+    if not result[op][0] then
+      result[op][0]=query(clause.arguments[i])
+    else
+      result[op][#result[op]+1] = query(clause.arguments[i])
+    end
+  end
 end
 
 return query
