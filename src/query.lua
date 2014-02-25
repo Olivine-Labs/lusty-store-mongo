@@ -9,7 +9,7 @@ local ops = {
   lte     = function(result, clause) queries.simpleOp("$lte", result, clause) end,
   gt      = function(result, clause) queries.simpleOp("$gt", result, clause) end,
   gte     = function(result, clause) queries.simpleOp("$gte", result, clause) end,
-  reg     = function(result, clause) queries.simpleOp("$regex", result, clause) end,
+  reg     = function(result, clause) queries.regexOp(result, clause) end,
   is      = function(result, clause) queries.arrayOp("$in", result, clause) end,
   has     = function(result, clause) queries.arrayOp("$all", result, clause) end,
   isnot   = function(result, clause) queries.arrayOp("$nin", result, clause) end,
@@ -46,6 +46,22 @@ end
 
 function queries.arrayOp(op, result, clause)
   result[clause.field] = {[op] = clause.arguments}
+end
+
+function queries.regexOp(result, clause)
+  local regexes = {}
+
+  for _, v in pairs(clause.arguments) do
+    local res = {}
+    string.gsub(v, "([^/]+)", function(c) res[#res+1] = c end)
+    regexes[#regexes+1] = {["$regex"] = res[1], ["$options"] = res[2]}
+  end
+
+  if #regexes == 1 then
+    result[clause.field] = regexes[1]
+  else
+    result[clause.field] = {["$in"] = regexes}
+  end
 end
 
 function queries.subquery(op, result, clause)
