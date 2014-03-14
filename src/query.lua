@@ -23,6 +23,10 @@ local ops = {
   end,
   fields  = function(result, clause, meta)
     meta.fields = clause.arguments[1]
+  end,
+  inc     = function(result, clause, meta)
+    if not meta.inc then meta.inc = {} end
+    meta.inc[clause.field] = clause.arguments[1]
   end
 }
 
