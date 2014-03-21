@@ -1,10 +1,10 @@
-local util = require 'lusty.util'
 local packageName = (...):match("(.-)[^%.]+$")
 local query = require 'lusty-store-mongo.query'
+local connection = require(packageName..'.connection')
 
 return {
   handler = function(context)
-    local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
+    local col = connection(lusty, config)
     local q = query(context.query)
     if q['_id'] then
       return col:find_one(q, {_id=1, lastModified=1})

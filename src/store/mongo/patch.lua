@@ -1,6 +1,6 @@
-local util = require 'lusty.util'
 local packageName = (...):match("(.-)[^%.]+$")
 local query = require 'lusty-store-mongo.query'
+local connection = require(packageName..'.connection')
 
 return {
   handler = function(context)
@@ -10,7 +10,7 @@ return {
       context.data["$inc"] = m.inc
     end
     if not next(context.data) then context.data["$set"] = {} end
-    local col = util.inline(packageName..'.connection', {lusty=lusty, config=config})
+    local col = connection(lusty, config)
     return col:update(q, context.data, 0, 1, 1)
   end
 }
