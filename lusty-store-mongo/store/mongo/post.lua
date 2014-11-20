@@ -1,6 +1,5 @@
-local packageName = (...):match("(.-)[^%.]+$")
-local objectId    = require 'resty-mongol.object_id'
-local connection  = require(packageName..'.connection')
+local objectId = require 'resty-mongol.object_id'
+local connection = require 'lusty-store-mongo.store.mongo.connection'
 
 return {
   handler = function(context)

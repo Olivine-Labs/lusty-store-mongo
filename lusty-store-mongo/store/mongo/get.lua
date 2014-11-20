@@ -1,10 +1,14 @@
-local packageName = (...):match("(.-)[^%.]+$")
 local query = require 'lusty-store-mongo.query'
-local connection = require(packageName..'.connection')
+local connection = require 'lusty-store-mongo.store.mongo.connection'
 
 return {
   handler = function(context)
-    local q, m = query(context.query)
+    local q, m
+    if getmetatable(context.query) then
+      q, m = query(context.query)
+    else
+      q, m = context.query, context.data
+    end
     local col = connection(lusty, config)
     local results = {}
     local cursor = col:find(q, m.fields)

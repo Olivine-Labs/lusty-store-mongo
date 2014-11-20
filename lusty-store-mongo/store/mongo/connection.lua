@@ -1,4 +1,5 @@
 local mongo = require "resty-mongol"
+
 return function(lusty, config)
   local conn = mongo()
   conn:set_timeout(config.timeout)

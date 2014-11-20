@@ -1,6 +1,6 @@
-local packageName = (...):match("(.-)[^%.]+$")
 local query = require 'lusty-store-mongo.query'
-local connection = require(packageName..'.connection')
+local connection = require 'lusty-store-mongo.store.mongo.connection'
+
 return {
   handler = function(context)
     local q, m = query(context.query)
