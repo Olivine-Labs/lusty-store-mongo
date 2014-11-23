@@ -59,11 +59,11 @@ describe("Store", function()
 
     local items = convertToList(col:find({}))
     assert.are.equal(50, #items)
-    assert.are.equal(col:count(), 50)
+    assert.are.equal(50, col:count())
 
     local items2 = convertToList(col:find({ab="a"}))
     assert.are.equal(25, #items2)
-    assert.are.equal(col:count({ab="a"}), 25)
+    assert.are.equal(25, col:count({ab="a"}))
 
   end)
 
